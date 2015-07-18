@@ -1,0 +1,87 @@
+<section id="messages" class="section container-fluid full-height">
+  <form>
+    <div ui-state="state" ui-default="1" ng-controller="MessagesController">
+      <div ui-if="state == 1">
+        <div class="block-title">
+          <h3 class="block-header text-center">Invite People</h3>
+        </div>
+        <div class="block-content scrollable">
+          <div class="list-group scrollable-content">
+            <div class="list-group-item">
+              <label>
+                <span class="include pull-left">
+                  <i class="fa fa-circle"></i>
+                  Include(<span id="included-count">{{includedCount}}</span>)
+                </span>
+                <span class="exclude pull-right">
+                  Exclude(<span id="excluded-count">{{excludedCount}}</span>)
+                  <i class="fa fa-circle"></i>
+                </span>
+              </label>
+            </div>
+            <div class="list-group-item" ng-repeat="contact in contacts | orderBy:'name.formatted'">
+              <label class="text-center" select-recipient ng-init="selected = false">
+                <span ng-switch on="selected" class="include pull-left">
+                  <i ng-switch-when="false" class="fa fa-circle-o"></i>
+                  <i ng-switch-when="true" class="fa fa-circle"></i>
+                </span>
+                {{contact.name.formatted}}
+                <input type="checkbox" checklist-model="message.recipientIds" checklist-value="contact.id" ng-change="change()">
+                <span ng-switch on="!selected" class="exclude pull-right">
+                  <i ng-switch-when="false" class="fa fa-circle-o"></i>
+                  <i ng-switch-when="true" class="fa fa-circle"></i>
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="block-action clearfix">
+            <a class="btn btn-ntfy btn-block" ui-set="{'state': 2}" ng-click="changeRecipientNames()">Next</a>
+          </div>
+        </div>
+      </div>
+
+      <div ui-if="state == 2">
+        <div class="block-title">
+          <h3 class="block-header text-center">Compose Message</h3>
+        </div>
+        <div class="block-content scrollable">
+          <div class="scrollable-content">
+            <textarea ng-model="message.body"></textarea>
+          </div>
+          <div class="block-action clearfix">
+            <div class="col-xs-6 col-md-6">
+              <a class="btn btn-ntfy btn-block" ui-set="{'state': 1}">Back</a>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <a class="btn btn-ntfy btn-block" ui-set="{'state': 3}">Next</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ui-if="state == 3">
+        <div class="block-title">
+          <h3 class="block-header text-center">Confirm</h3>
+        </div>
+        <div class="block-content scrollable">
+          <div class="scrollable-content">
+            <div class="message-body">
+              <h4 ng-bind="message.body"></h4>
+            </div>
+            <div class="message-recipients">
+              <h4 ng-bind="recipientsNames"></h4>
+            </div>
+          </div>
+          <div class="block-action clearfix">
+            <div class="col-xs-6 col-md-6">
+              <a class="btn btn-ntfy btn-block" ui-set="{'state': 2}">Back</a>
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <a class="btn btn-ntfy btn-block" ng-click="sendMessage()">Send</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>

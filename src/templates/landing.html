@@ -1,0 +1,50 @@
+<section class="landing section container-fluid full-height">
+  <div class="scrollable">
+    <div class="scrollable-content">
+      <div class="page-header">
+        <h4>In Loving Memory</h4>
+      </div>
+      <div class="page-content clearfix" ng-controller="LandingController">
+        <div class="person-img">
+          <img src="{{person.image}}" alt="Profile">
+        </div>
+        <div class="person-info clearfix">
+          <div class="col-xs-12">
+            <h3 class="person-name">{{person.name}}</h3>
+            <h5 class="person-life">{{person.birth}} - {{person.death}}</h5>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <div class="obituary">
+            <h5>Obituary</h5>
+            <div ng-bind-html="obituary"></div>
+          </div>
+          <hr />
+          <div class="service">
+            <div class="row">
+              <div class="col-xs-6">SERVICE DATE</div>
+              <div class="col-xs-6">SERVICE TIME</div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <h5>{{service.date}}</h5>
+              </div>
+              <div class="col-xs-6">
+                <h5>{{service.time}}</h5>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-xs-12">SERVICE ADDRESS</div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <h5>{{service.address}}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
